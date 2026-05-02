@@ -1,0 +1,166 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-50: #f0f9ff;
+  --color-primary-100: #e0f2fe;
+  --color-primary-200: #bae6fd;
+  --color-primary-300: #7dd3fc;
+  --color-primary-400: #38bdf8;
+  --color-primary-500: #0ea5e9;
+  --color-primary-600: #0284c7;
+  --color-primary-700: #0369a1;
+  --color-primary-800: #075985;
+  --color-primary-900: #0c4a6e;
+
+  --color-sage-50: #f4f7f4;
+  --color-sage-100: #e6ede6;
+  --color-sage-200: #ccd9cc;
+  --color-sage-300: #b3c5b3;
+  --color-sage-400: #99b199;
+  --color-sage-500: #809d80;
+  --color-sage-600: #667e66;
+  --color-sage-700: #4d5e4d;
+  --color-sage-800: #333f33;
+  --color-sage-900: #1a1f1a;
+
+  --animate-gradient-x: gradient-x 15s ease infinite;
+  --animate-gradient-y: gradient-y 15s ease infinite;
+  --animate-gradient-xy: gradient-xy 15s ease infinite;
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes gradient-y {
+    0%, 100% {
+      background-size: 400% 400%;
+      background-position: center top;
+    }
+    50% {
+      background-size: 200% 200%;
+      background-position: center center;
+    }
+  }
+
+  @keyframes gradient-x {
+    0%, 100% {
+      background-size: 200% 200%;
+      background-position: left center;
+    }
+    50% {
+      background-size: 200% 200%;
+      background-position: right center;
+    }
+  }
+
+  @keyframes gradient-xy {
+    0%, 100% {
+      background-size: 400% 400%;
+      background-position: left center;
+    }
+    50% {
+      background-size: 200% 200%;
+      background-position: right center;
+    }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+}
+
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-blur: 12px;
+}
+
+.dark {
+  --glass-bg: rgba(0, 0, 0, 0.2);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+@layer base {
+  * {
+    @apply border-slate-200 dark:border-white/10;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply antialiased text-slate-900 bg-white dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300 min-h-screen overflow-x-hidden;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 dark:bg-slate-700 rounded-full hover:bg-slate-400 dark:hover:bg-slate-600 transition-colors;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply backdrop-blur-md border border-white/30 dark:border-white/10 shadow-xl;
+    background-color: var(--glass-bg);
+  }
+  
+  .glass-input {
+    @apply backdrop-blur-sm border border-white/20 dark:border-white/10 focus:ring-2 focus:ring-primary-400 focus:border-transparent outline-none transition-all duration-300;
+    background-color: var(--glass-bg);
+  }
+
+  .btn-primary {
+    @apply px-6 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-xl shadow-lg shadow-primary-500/20 hover:shadow-primary-500/40 transition-all duration-300 active:scale-95 disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-2 bg-white/10 hover:bg-white/20 border border-white/20 rounded-xl backdrop-blur-md transition-all duration-300 active:scale-95 disabled:opacity-50;
+  }
+
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.slate.300') transparent;
+  }
+  
+  .dark .custom-scrollbar {
+    scrollbar-color: theme('colors.slate.700') transparent;
+  }
+}
+
+.animated-bg {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.blob {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: linear-gradient(180deg, rgba(47, 184, 255, 0.42) 31.77%, #5c9df1 100%);
+  mix-blend-mode: color-dodge;
+  animation: move 25s infinite alternate;
+  filter: blur(80px);
+  border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes move {
+  from { transform: translate(-10%, -10%) rotate(-90deg); }
+  to { transform: translate(20%, 20%) rotate(90deg); }
+}
+
+* {
+  @apply transition-colors duration-200;
+}
