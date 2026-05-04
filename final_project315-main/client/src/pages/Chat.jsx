@@ -258,7 +258,7 @@ const Chat = () => {
         </div>
 
         {/* Action Area */}
-        <div className="p-6 bg-slate-50/50 dark:bg-black/20 border-t border-slate-100 dark:border-white/5">
+        <div className="p-6 bg-slate-50/50 dark:bg-black/20 border-t border-slate-100 dark:border-white/5 overflow-y-auto max-h-[70%] shrink-0 custom-scrollbar">
           <AnimatePresence mode="wait">
             {!done ? (
               <motion.div 
